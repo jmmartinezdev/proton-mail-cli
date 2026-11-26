@@ -124,7 +124,7 @@ These checks do not require Bridge or a keyring and do not verify live
 compatibility. The maintainer has verified live Bridge sending and drafting on
 **macOS**; live Linux and Windows operation has not been verified.
 
-## Phase 6: CLI acceptance against a live Bridge
+## Live Bridge integration tests
 
 Ordinary test runs are offline. To run acceptance, start and sign in to Bridge,
 use an explicit test config and its secure keyring entry, and choose a test
@@ -145,9 +145,9 @@ PROTON_MAIL_TEST_RECIPIENT="test-recipient@example.net" \
 The suite requires both explicit `-m integration` and `PROTON_MAIL_TEST_LIVE=1`.
 No password is passed in the environment; the CLI uses the configured account's
 keyring entry. Repeat with each configured custom-domain sender. Each case
-prints a unique `Phase 6 CLI …` search subject and the SHA-256 of its synthetic
-`phase6-test.pdf`. `-x` stops the run at the first failure. If a submission's
-outcome is uncertain, search for that exact subject before rerunning.
+prints a unique subject to search for and the SHA-256 of its synthetic PDF.
+`-x` stops the run at the first failure. If a submission's outcome is uncertain,
+search for that exact subject before rerunning.
 
 Passing tests confirm Bridge acceptance for live cases, **not** delivery or
 web sync. Complete these manual checks for each run:
@@ -161,9 +161,9 @@ web sync. Complete these manual checks for each run:
    formatting, and attachment, then edit the body, close, and reopen the draft
    to confirm the edit persists. Confirm it did not appear in Sent or at the
    recipient. Leave it unsent for cleanup.
-3. **PDF integrity:** Open each downloaded `phase6-test.pdf` and run
-   `shasum -a 256 /path/to/downloaded/phase6-test.pdf`. Compare it with the
-   checksum printed for that case.
+3. **PDF integrity:** Open each downloaded test PDF and run
+   `shasum -a 256 "/path/to/downloaded/test-attachment.pdf"` with its actual
+   path. Compare the result with the checksum printed for that case.
 4. **`dry-run` / `invalid`:** Search Drafts, Sent, and the recipient's mailbox.
    None of these subjects should appear. The dry run must return `0`; the
    missing body file must return `2`.
@@ -173,12 +173,12 @@ web sync. Complete these manual checks for each run:
    Sent, and the recipient's mailbox. The suite never sends a draft or deletes
    mail.
 
-The maintainer confirmed Phase 6 acceptance on macOS: all eight live cases
+The maintainer verified the CLI on macOS: all eight live cases
 passed, the test emails and drafts were correct, and the PDF checksums matched.
 
-## Phase 0: Bridge compatibility probe
+## Bridge compatibility probe
 
-This phase provides a standalone probe, not the production CLI. The `smtp`
+This is a standalone diagnostic script, not the production CLI. The `smtp`
 command sends **one real email**; the `imap` command appends **one draft** and
 does not send it. Use your own address or a disposable test recipient, and a
 small, non-sensitive PDF that you can open before and after the test.
@@ -265,7 +265,7 @@ use the printed subject to check Proton Mail and the recipient before retrying.
 - After recording results, remove the test drafts and messages from Drafts,
   Sent, and the test recipient’s mailbox as applicable.
 
-### Phase 0 retest template
+### Recording probe results
 
 The maintainer verified sending and drafting with the local Bridge and confirmed
 that one shared Bridge profile is sufficient. The table below is a template for
