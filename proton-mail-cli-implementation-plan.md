@@ -2,8 +2,7 @@
 
 ## Development checklist
 
-**Current state:** Phases 0 through 6 are complete. Phase 7 implementation
-and local verification are done; the hosted CI matrix is pending.
+**Current state:** Phases 0 through 7 are complete.
 
 - [x] Phase 0 — Bridge compatibility: maintainer verified sending and drafting with the local Bridge.
 - [x] Phase 1 — Project skeleton and configuration: automated checks pass; manual system-keyring verification is documented in the README.
@@ -12,7 +11,7 @@ and local verification are done; the hosted CI matrix is pending.
 - [x] Phase 4 — IMAP adapter
 - [x] Phase 5 — CLI and orchestration
 - [x] Phase 6 — Tests and acceptance: offline checks passed and the maintainer verified the live run.
-- [ ] Phase 7 — Packaging and documentation
+- [x] Phase 7 — Packaging and documentation
 
 ## 1. Objective and scope
 
@@ -188,8 +187,9 @@ Document Bridge startup/login requirements, certificate export and rotation, con
 lint and formatting checks, all 170 offline tests, and CLI help passed. An
 isolated uv tool install and reinstall passed, and the installed entry point
 and all three subcommand help screens worked from outside the checkout.
-The workflow YAML was checked locally. The hosted macOS, Linux, and Windows
-matrix still needs to run and pass once the workflow is on GitHub.
+The maintainer confirmed that all three hosted GitHub Actions jobs passed:
+macOS, Linux, and Windows. These were offline checks; live Bridge acceptance
+was verified on macOS only.
 
 ## Definition of done
 
