@@ -1,0 +1,20 @@
+# macOS Finder metadata
+.DS_Store
+
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Local Bridge configuration and certificate exports
+config.toml
+*.pem
+*.crt
+*.key
+*.eml

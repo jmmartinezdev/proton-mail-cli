@@ -1,0 +1,29 @@
+[project]
+name = "proton-mail-cli"
+version = "0.1.0"
+description = "Send email and save editable drafts through a local Proton Mail Bridge."
+readme = "README.md"
+authors = [
+    { name = "Chema Martinez", email = "jmmartinezdev@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "keyring>=25.7.0",
+    "tomli-w>=1.2.0",
+]
+
+[project.scripts]
+proton-mail = "proton_mail_cli.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.13.10,<0.14.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+    "ruff>=0.17.6",
+]
+
+[tool.pytest.ini_options]
+markers = ["integration: opt-in tests against a live Proton Mail Bridge"]
